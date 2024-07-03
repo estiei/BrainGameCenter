@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title>Data Visualizations</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+      body {
+        font: normal 12pt sans-serif
+      }
+      .container {
+        width: 1100px;
+        margin: auto;
+      }
+      .graph {
+        width: 1000px;
+        height: 500px;
+      }
+  </style>
+  </head>
+  <body>
+
+    {% block content %}
+
+    <div class="container">
+
+    <h1>Results of the verbal part of the Shipley test</h1>
+
+    <p>
+    The data is generated automatically for 120 participants: 60 participants represent a group with average performance, 30 participants perform above average, and 30 perform below average.
+    The data is distributed quasi-normally on two dimensions: response time and correctness.
+    For representing the results, we use Item Response Theory (IRT) to evaluate two parameters: the ability of each participant to answer test questions and the difficulty of each test item.
+    More about IRT can be found here: <a href="https://en.wikipedia.org/wiki/Item_response_theory">Item Response Theory</a>.
+
+    <p>
+    We start with the general representation of test results for the tested group.
+    The graph below shows the overall distribution of the number of correct answers among the participants.
+    Number of questions = 40.
+
+    <br/><br/><br/>
+
+    <div class="graph">
+
+        {% autoescape off %}
+
+        {{ correct_answer_histogram }}
+    
+        {% endautoescape %}
+
+    </div>
+
+    <p>
+    The graph below shows the ability (agency) of the participants to answer the test questions.
+    Ability is calculated using Item Response Theory (IRT), which measures an individual's proficiency or skill level in the domain being tested.
+    Ability is typically represented on a continuous scale, with a mean of 0.
+    This scale is arbitrary but helps in interpreting the relative proficiency of individuals within the tested group.
+
+    <p>
+    The standard deviation (SD) indicates the variability in the abilities of participants who were able to answer a certain number of questions correctly.
+
+    <div class="graph">
+
+        {% autoescape off %}
+
+        {{ correct_answers_vs_ability }}
+
+        {% endautoescape %}
+
+    </div>
+
+    <br/><br/><br/>
+
+    <p>
+    On the graph below, you can see the questions (words) ranked according to the time spent on each question and the average percentage of correct answers.
+    To change the representation, please select the desired scale from the drop-down menu.
+
+    <div class="graph">
+
+        {% autoescape off %}
+
+        {{ combined_figure }}
+
+        {% endautoescape %}
+
+    </div>
+
+    <br/><br/><br/>
+
+    <p>
+    The following graph shows the correlation between item difficulty and the amount of time spent on each item.
+    In IRT, difficulty is a parameter that indicates how challenging a test item is, defined by the ability level at which there is a 50% chance of a correct response.
+
+    <div class="graph">
+
+        {% autoescape off %}
+
+        {{ scatter_plot }}
+
+        {% endautoescape %}
+
+    </div>
+
+    </div>
+
+    {% endblock %}
+
+  </body>
+</html>
